@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Vec.h"
-#include "sorts.cpp"
+#include "sorts.h"
 
 using namespace std;
 
