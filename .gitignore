@@ -1,0 +1,16 @@
+# Visual Studio / VS Code generated files
+.vs/
+v18/
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+
+# Executables
+*.exe
+benchmark
+
+# Object files
+*.o
+*.obj
