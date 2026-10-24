@@ -1,5 +1,5 @@
-#ifndef SORTS.H
-#define SORTS.H
+#ifndef SORTS_H
+#define SORTS_H
 
 #include "Vec.h"
 
