@@ -17,7 +17,7 @@ cout <<"Before: "<< v << endl;
 
 BubbleSort(v);
 
-cout <<"After: "<< v << endl;
+cout <<"After:  "<< v << endl;
 
 return 0;
 }
