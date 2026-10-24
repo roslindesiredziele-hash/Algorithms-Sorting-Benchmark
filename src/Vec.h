@@ -15,6 +15,9 @@ public:
     int size() const;
     int capacity() const;
 
+    int& operator[](int i);
+    const int& operator[](int i) const;
+
     int& get(int i);
     const int& get(int i) const;
 
