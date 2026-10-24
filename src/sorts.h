@@ -3,7 +3,7 @@
 
 #include "Vec.h"
 
-void BubbleSort(vec& v);
+void BubbleSort(Vec& v);
 
 #endif
 
