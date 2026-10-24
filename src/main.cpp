@@ -14,4 +14,6 @@ int main()
     cout<< v.get(0) << " "
     << v.get(1) << " "
     << v.get(2) << endl;
+
+    return 0;
 }
