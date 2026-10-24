@@ -1,5 +1,6 @@
 #ifndef VEC_H
 #define VEC_H
+#include <ostream>
 
 class Vec
 {

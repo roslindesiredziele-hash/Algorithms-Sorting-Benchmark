@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Vec.h"
+#include "sorts.cpp"
 
 using namespace std;
 
@@ -7,13 +8,16 @@ int main()
 {
     Vec v(1);
 
-    v.push(10);
-    v.push(20);
-    v.push(30);
+v.push(5);
+v.push(3);
+v.push(8);
+v.push(1);
 
-    cout<< v.get(0) << " "
-    << v.get(1) << " "
-    << v.get(2) << endl;
+cout <<"Before: "<< v << endl;
 
-    return 0;
+BubbleSort(v);
+
+cout <<"After: "<< v << endl;
+
+return 0;
 }
