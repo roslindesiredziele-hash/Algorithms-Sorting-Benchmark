@@ -1,5 +1,6 @@
 #include "Vec.h"
 #include <algorithm>
+#include <ostream>
 #include <stdexcept>
 
 Vec::Vec(int n)
@@ -205,4 +206,25 @@ void Vec::rotate(int x)
     reverse();           // reverse whole vector
     reverse(0, x - 1);   // reverse first part
     reverse(x, len - 1); // reverse second part
+}
+
+std::ostream &operator<<(std::ostream& ostr, const Vec &v)
+{
+    ostr << "[";
+
+    int n = v.size();
+
+    for (int i = 0; i < n; i++)
+    {
+        ostr << v[i];
+
+        if (i != n - 1)
+        {
+            ostr << "; ";
+        }
+    }
+
+    ostr << "]";
+
+    return ostr;
 }

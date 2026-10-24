@@ -48,7 +48,7 @@ public:
     Vec& operator=(Vec cpy);
 };
 
-std::ostream& operator<<(std::ostream&, const Vec& v);
+std::ostream& operator<<(std::ostream& ostr, const Vec& v);
 
 #endif
 
