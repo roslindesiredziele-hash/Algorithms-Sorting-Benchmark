@@ -7,26 +7,23 @@ Vec::Vec(int n)
 {
 }
 
-Vec::Vec(const Vec& other) :
-    cap(other.cap),
-    len(other.len),
-    mem(new int[cap])
+Vec::Vec(const Vec &other) : cap(other.cap),
+                             len(other.len),
+                             mem(new int[cap])
 {
     for (int i = 0; i < len; i++)
     {
-		mem[i] = other.mem[i];
+        mem[i] = other.mem[i];
     }
 }
 
-Vec& Vec::operator=(Vec other)
+Vec &Vec::operator=(Vec other)
 {
     std::swap(cap, other.cap);
     std::swap(len, other.len);
     std::swap(mem, other.mem);
     return *this;
 }
-
-
 
 Vec::~Vec()
 {
@@ -43,15 +40,28 @@ int Vec::capacity() const
     return cap;
 }
 
-int& Vec::get(int i)
+int &Vec::operator[](int i)
+{
+    if (i < 0 || i >= len)
+        throw std::out_of_range("index out of range");
+    return mem[i];
+}
+
+const int &Vec::operator[](int i) const
+{
+    if (i < 0 || i >= len)
+        throw std::out_of_range("index out of range");
+    return mem[i];
+}
+
+int &Vec::get(int i)
 {
     if (i < 0 || i >= len)
         throw std::out_of_range("Index out of range");
     return mem[i];
-
 }
 
-const int& Vec::get(int i) const
+const int &Vec::get(int i) const
 {
     return mem[i];
 }
@@ -73,7 +83,7 @@ void Vec::resize(int new_cap)
     cap = std::max(1, new_cap);
 
     // Allocate new memory
-    int* new_mem = new int[cap];
+    int *new_mem = new int[cap];
 
     // Adjust length if needed
     len = std::min(len, cap);
@@ -96,16 +106,7 @@ void Vec::push(int el)
     len++;
 }
 
-int& Vec::first()
-{
-    if (empty())
-    {
-		throw std::out_of_range("Vector is empty");
-    }
-    return mem[0];
-}
-
-const int& Vec::first() const
+int &Vec::first()
 {
     if (empty())
     {
@@ -114,7 +115,16 @@ const int& Vec::first() const
     return mem[0];
 }
 
-int& Vec::last()
+const int &Vec::first() const
+{
+    if (empty())
+    {
+        throw std::out_of_range("Vector is empty");
+    }
+    return mem[0];
+}
+
+int &Vec::last()
 {
     if (empty())
     {
@@ -123,7 +133,7 @@ int& Vec::last()
     return mem[len - 1];
 }
 
-const int& Vec::last() const
+const int &Vec::last() const
 {
     if (empty())
     {
@@ -192,7 +202,7 @@ void Vec::rotate(int x)
         return;
 
     // Three-step rotation
-    reverse();                 // reverse whole vector
-    reverse(0, x - 1);         // reverse first part
-    reverse(x, len - 1);       // reverse second part
+    reverse();           // reverse whole vector
+    reverse(0, x - 1);   // reverse first part
+    reverse(x, len - 1); // reverse second part
 }
