@@ -8,26 +8,16 @@ int main()
 {
     Vec V(1);
 
-V.push(5);
-V.push(3);
-V.push(8);
-V.push(1);
+    V.push(5);
+    V.push(3);
+    V.push(8);
+    V.push(1);
 
-Vec D = V;  //Vec D(V);
-D.push(9);
-D.push(7);
+    cout << "Before: " << V << endl;
 
-cout <<"Before: "<< V << endl;
+    MergeSort(V, 0, V.size() - 1);
 
-BubbleSort(V);
+    cout << "After : " << V << endl;
 
-cout <<"After BubbleSort:  "<< V << endl;
-
-cout <<"Before: "<< D << endl;
-
-InsertionSort(D);
-
-cout <<"After InsertionSort: "<< D << endl;
-
-return 0;
+    return 0;
 }
