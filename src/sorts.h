@@ -5,6 +5,7 @@
 
 void BubbleSort(Vec& V);
 void InsertionSort(Vec& V);
+void MergeSort(Vec& V);
 
 #endif
 
