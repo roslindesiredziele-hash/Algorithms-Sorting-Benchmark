@@ -3,7 +3,7 @@
 
 #include "Vec.h"
 
-void BubbleSort(Vec& v);
+void BubbleSort(Vec& V);
 void InsertionSort(Vec& V);
 
 #endif
