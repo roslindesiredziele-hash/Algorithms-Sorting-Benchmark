@@ -1,6 +1,7 @@
 # Visual Studio / VS Code generated files
 .vs/
 v18/
+.vscode
 
 # Database files
 *.db
