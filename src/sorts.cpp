@@ -38,3 +38,20 @@ void InsertionSort(Vec &V)
         V[track + 1] = temp;
     }
 }
+
+
+
+void MergeSort(Vec& V, int left, int right)
+{
+    if(left >= right)
+    {
+        return;
+    }
+
+    int mid  = (left + right)/2;
+
+    MergeSort(V, left, mid);
+    MergeSort(V, mid + 1, right);
+
+    Merge(V, left, mid, right);
+}
