@@ -39,7 +39,45 @@ void InsertionSort(Vec &V)
     }
 }
 
+void merge(Vec& V, int left, int mid, int right)
+{
+    int n = right - left + 1;
+    Vec temp(n);
 
+    int i = left;
+    int j = mid + 1;
+
+    while (i <= mid && j <= right)
+    {
+        if(V[i] <= V[j])
+        {
+            temp.push(V[i]);
+            i++;
+        }
+        else
+        {
+            temp.push(V[j]);
+            j++;
+        }
+    }
+
+    while (i <= mid)
+    {
+        temp.push(V[i]);
+        i++;
+    }
+
+    while(j <= right)
+    {
+        ttemp.push(V[j]);
+        j++;
+    }
+
+    for(int step = 0; step < temp.size(); step++)
+    {
+        V[left + step] = temp[step];
+    }
+}
 
 void MergeSort(Vec& V, int left, int right)
 {
