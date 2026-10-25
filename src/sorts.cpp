@@ -20,3 +20,21 @@ void BubbleSort(Vec &V)
         }
     }
 }
+
+void InsertionSort(Vec& V)
+{
+    int n = V.size();
+    for (int i = 1; i < n; i++)
+    {
+        int temp = V[i];
+        int track = i - 1;
+
+        while(track >=0 && V[track] > temp)
+        {
+            V[track + 1] = V[track];
+            track--;
+        }
+
+        V[track + 1] = temp;
+    }
+}

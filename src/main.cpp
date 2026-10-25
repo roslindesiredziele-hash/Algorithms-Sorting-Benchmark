@@ -9,13 +9,13 @@ int main()
     Vec V(1);
 
 V.push(5);
-v.push(3);
-v.push(8);
-v.push(1);
+V.push(3);
+V.push(8);
+V.push(1);
 
 cout <<"Before: "<< V << endl;
 
-BubbleSort(v);
+BubbleSort(V);
 
 cout <<"After:  "<< V << endl;
 
