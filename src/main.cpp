@@ -6,18 +6,18 @@ using namespace std;
 
 int main()
 {
-    Vec v(1);
+    Vec V(1);
 
-v.push(5);
+V.push(5);
 v.push(3);
 v.push(8);
 v.push(1);
 
-cout <<"Before: "<< v << endl;
+cout <<"Before: "<< V << endl;
 
 BubbleSort(v);
 
-cout <<"After:  "<< v << endl;
+cout <<"After:  "<< V << endl;
 
 return 0;
 }

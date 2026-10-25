@@ -208,15 +208,15 @@ void Vec::rotate(int x)
     reverse(x, len - 1); // reverse second part
 }
 
-std::ostream &operator<<(std::ostream& ostr, const Vec &v)
+std::ostream &operator<<(std::ostream& ostr, const Vec &V)
 {
     ostr << "[";
 
-    int n = v.size();
+    int n = V.size();
 
     for (int i = 0; i < n; i++)
     {
-        ostr << v[i];
+        ostr << V[i];
 
         if (i != n - 1)
         {
