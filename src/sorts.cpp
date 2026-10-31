@@ -86,7 +86,7 @@ void MergeSort(Vec& V, int left, int right)
         return;
     }
 
-    int mid  = (left + right)/2;
+    int mid  = left + (right - left)/2;
 
     MergeSort(V, left, mid);
     MergeSort(V, mid + 1, right);
