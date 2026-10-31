@@ -29,7 +29,7 @@ int main()
         QueryPerformanceCounter(&t);
         BubbleSort(orBub);
         QueryPerformanceCounter(&t1);
-        double Bubtime = (t1.QuadPart - t.QuadPart) * 100.0 / f.QuadPart;
+        double Bubtime = (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
         /*cout << "Sorted: " << orBub << "\n"
              << endl; */
 
@@ -37,7 +37,7 @@ int main()
         QueryPerformanceCounter(&t);
         InsertionSort(orInsert);
         QueryPerformanceCounter(&t1);
-        double Insertime = (t1.QuadPart - t.QuadPart) * 100.0 / f.QuadPart;
+        double Insertime = (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
         /*  cout << "Sorted: " << orInsert << "\n"
                 << endl; */
 
@@ -45,7 +45,7 @@ int main()
         QueryPerformanceCounter(&t);
         MergeSort(orMerge, 0, orMerge.size() - 1);
         QueryPerformanceCounter(&t1);
-        double Mergetime = (t1.QuadPart - t.QuadPart) * 100.0 / f.QuadPart;
+        double Mergetime = (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
         /* cout << "Sorted: " << orMerge << "\n"
               << endl; */
 
