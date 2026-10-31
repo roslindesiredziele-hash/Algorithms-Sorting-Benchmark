@@ -7,7 +7,7 @@ class Vec
 private:
     int cap;
     int len;
-    int* mem;
+    int *mem;
 
 public:
     Vec(int n);
@@ -16,11 +16,11 @@ public:
     int size() const;
     int capacity() const;
 
-    int& operator[](int i);
-    const int& operator[](int i) const;
+    int &operator[](int i);
+    const int &operator[](int i) const;
 
-    int& get(int i);
-    const int& get(int i) const;
+    int &get(int i);
+    const int &get(int i) const;
 
     void pop();
     bool empty() const;
@@ -29,11 +29,11 @@ public:
 
     void push(int el);
 
-    int& first();
-    const int& first() const;
+    int &first();
+    const int &first() const;
 
-    int& last();
-    const int& last() const;
+    int &last();
+    const int &last() const;
 
     void clear();
     bool contains(int x) const;
@@ -45,11 +45,10 @@ public:
 
     void rotate(int x);
 
-    Vec(const Vec& other);
-    Vec& operator=(Vec cpy);
+    Vec(const Vec &other);
+    Vec &operator=(Vec cpy);
 };
 
-std::ostream& operator<<(std::ostream& ostr, const Vec& V);
+std::ostream &operator<<(std::ostream &ostr, const Vec &V);
 
 #endif
-

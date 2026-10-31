@@ -1,5 +1,18 @@
 #include "sorts.h"
 
+bool isSorted(const Vec &V)
+{
+    for (int i = 1; i < V.size(); i++)
+    {
+        if (V[i - 1] > V[i])
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 void SwapInt(int &a, int &b)
 {
     int temp = a;
@@ -39,7 +52,7 @@ void InsertionSort(Vec &V)
     }
 }
 
-void Merge(Vec& V, int left, int mid, int right)
+void Merge(Vec &V, int left, int mid, int right)
 {
     int n = right - left + 1;
     Vec temp(n);
@@ -49,7 +62,7 @@ void Merge(Vec& V, int left, int mid, int right)
 
     while (i <= mid && j <= right)
     {
-        if(V[i] <= V[j])
+        if (V[i] <= V[j])
         {
             temp.push(V[i]);
             i++;
@@ -67,26 +80,26 @@ void Merge(Vec& V, int left, int mid, int right)
         i++;
     }
 
-    while(j <= right)
+    while (j <= right)
     {
         temp.push(V[j]);
         j++;
     }
 
-    for(int step = 0; step < temp.size(); step++)
+    for (int step = 0; step < temp.size(); step++)
     {
         V[left + step] = temp[step];
     }
 }
 
-void MergeSort(Vec& V, int left, int right)
+void MergeSort(Vec &V, int left, int right)
 {
-    if(left >= right)
+    if (left >= right)
     {
         return;
     }
 
-    int mid  = left + (right - left)/2;
+    int mid = left + (right - left) / 2;
 
     MergeSort(V, left, mid);
     MergeSort(V, mid + 1, right);
