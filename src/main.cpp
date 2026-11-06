@@ -15,7 +15,7 @@ int main()
 
     cout << "OK\t\tN\tBubble\tInsertion\tMerge\tQuick" << endl;
 
-    for (int factor = 100; factor < 5000; factor += 100)
+    for (int factor = 100; factor <= 5000; factor += 100)
     {
         Vec V(1);
 
