@@ -114,7 +114,7 @@ void QuickSort(Vec &V, int left, int right)
         return;
     }
 
-    int pivotIndex = rand() % (right + 1);
+    int pivotIndex = left + rand() % (right - left + 1);
 
     SwapInt(V[pivotIndex], V[right]);
 
