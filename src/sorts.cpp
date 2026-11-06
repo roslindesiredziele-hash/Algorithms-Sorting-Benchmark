@@ -109,5 +109,8 @@ void MergeSort(Vec &V, int left, int right)
 
 QuickSort(Vec &V, int left, int right)
 {
-    
+    if (left >= right)
+    {
+        return;
+    }
 }
