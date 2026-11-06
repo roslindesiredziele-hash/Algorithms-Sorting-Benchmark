@@ -131,8 +131,8 @@ void QuickSort(Vec &V, int left, int right)
         }
     }
 
-    pivotIndex = i - 1;
+    pivotpos = i - 1;
 
-    QuickSort(V, left, pivotIndex - 1);
-    QuickSort(V, pivotIndex + 1, right);
+    QuickSort(V, left, pivotpos - 1);
+    QuickSort(V, pivotpos+ 1, right);
 }
