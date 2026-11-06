@@ -23,7 +23,7 @@ int main()
             V.push(num);
         }
 
-        Vec orMerge(V), orBub(V), orInsert(V);
+        Vec orMerge(V), orBub(V), orInsert(V), orQuick(V);
 
         //  cout << "\nOriginal BubVector: " << orBub << "\t\t";
         QueryPerformanceCounter(&t);
@@ -48,6 +48,14 @@ int main()
         double Mergetime = (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
         /* cout << "Sorted: " << orMerge << "\n"
               << endl; */
+
+        QueryPerformanceCounter(&t);
+
+        QuickSort(orQuick, 0, orQuick.size() - 1);
+
+        QueryPerformanceCounter(&t1);
+
+        double Quicktime = (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
 
         cout << isSorted(orBub) << " "
              << isSorted(orInsert) << " "
