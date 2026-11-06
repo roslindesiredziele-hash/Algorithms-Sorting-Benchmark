@@ -59,7 +59,8 @@ int main()
 
         cout << isSorted(orBub) << " "
              << isSorted(orInsert) << " "
-             << isSorted(orMerge) << endl;
+             << isSorted(orMerge) << " "
+             << isSorted(orQuick) << endl;
 
         cout << factor << "\t\t"
              << Bubtime << "\t\t"
