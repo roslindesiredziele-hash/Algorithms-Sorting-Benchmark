@@ -13,6 +13,8 @@ int main()
     LARGE_INTEGER t, t1, f;
     QueryPerformanceFrequency(&f);
 
+    cout << "OK\t\tN\tBubble\tInsertion\tMerge\tQuick" << endl;
+
     for (int factor = 100; factor < 5000; factor += 100)
     {
         Vec V(1);

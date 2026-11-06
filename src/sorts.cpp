@@ -131,7 +131,7 @@ void QuickSort(Vec &V, int left, int right)
         }
     }
 
-    pivotpos = i - 1;
+    int pivotpos = i - 1;
 
     QuickSort(V, left, pivotpos - 1);
     QuickSort(V, pivotpos+ 1, right);
