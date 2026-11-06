@@ -106,3 +106,8 @@ void MergeSort(Vec &V, int left, int right)
 
     Merge(V, left, mid, right);
 }
+
+QuickSort(Vec &V, int left, int right)
+{
+    
+}
