@@ -65,8 +65,8 @@ int main()
         cout << factor << "\t\t"
              << Bubtime << "\t\t"
              << Insertime << "\t\t"
-             << Mergetime << endl;
-        cout << endl;
+             << Mergetime << "\t\t"
+             << Quicktime << endl;
     }
 
     return 0;
