@@ -107,3 +107,38 @@ void MergeSort(Vec &V, int left, int right)
     Merge(V, left, mid, right);
 }
 
+void QuickSort(Vec &V, int left, int right)
+{
+    void QuickSort(Vec & V, int left, int right)
+    {
+        if (left >= right)
+        {
+            return;
+        }
+
+        int r = left + rand() % (right - left + 1);
+
+        SwapInt(V[r], V[right]);
+
+        int pivot = V[right];
+
+        int i = left - 1;
+
+        for (int j = left; j < right; j++)
+        {
+            if (V[j] <= pivot)
+            {
+                i++;
+
+                SwapInt(V[i], V[j]);
+            }
+        }
+
+        i++;
+
+        SwapInt(V[i], V[right]);
+
+        QuickSort(V, left, i - 1);
+        QuickSort(V, i + 1, right);
+    }
+}
