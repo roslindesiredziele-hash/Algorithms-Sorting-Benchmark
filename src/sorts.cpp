@@ -137,12 +137,23 @@ void QuickSort(Vec &V, int left, int right)
     QuickSort(V, pivotpos + 1, right);
 }
 
-void Heapify(Vec &V, int node, int n)
+void Heapify(Vec &V, int node)
 {
-    if (n <= 1)
-        return;
+    int l = node * 2 + 1;
+    int r = node * 2 + 2;
 
-    int lastNode = (n / 2) - 1;
-    int l = lastNode*2 + 1;
-    int r = lastNode*2 + 2;
+    if (V[l] > V[node])
+        SwapInt(V[l], V[node]);
+    if (V[r] > V[node])
+        SwapInt(V[r], V[node]);
+}
+
+void HeapSort(vec &V, int n)
+{
+    int lastnode = (n / 2) - 1;
+
+    for (i = lastParent; i >= 0; i--)
+    {
+        
+    }
 }

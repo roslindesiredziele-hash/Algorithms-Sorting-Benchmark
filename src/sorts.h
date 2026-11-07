@@ -13,7 +13,7 @@ void MergeSort(Vec &V, int left, int right);
 
 void QuickSort(Vec &V, int left, int right);
 
-void Heapify(Vec &V, int , int );
+void Heapify(Vec &V, int);
 void HeapSort(vec &V, int n);
 
 
