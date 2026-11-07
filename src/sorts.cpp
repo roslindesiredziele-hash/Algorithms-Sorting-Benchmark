@@ -178,3 +178,26 @@ void HeapSort(Vec &V)
         Heapify(V, end, 0);
     }
 }
+
+void ShellSort(Vec &V)
+{
+    int n = V.size();
+
+    for (int gap = n / 2; gap > 0; gap /= 2)
+    {
+        for (int i = gap; i < n; i++)
+        {
+            int temp = V[i];
+
+            int j = i;
+
+            while (j >= gap && V[j - gap] > temp)
+            {
+                V[j] = V[j - gap];
+                j -= gap;
+            }
+
+            V[j] = temp;
+        }
+    }
+}
