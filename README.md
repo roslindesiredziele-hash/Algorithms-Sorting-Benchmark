@@ -1,8 +1,14 @@
 # Algorithms Sorting Benchmark
 
-A C++ project comparing the performance of classical sorting algorithms using a custom dynamic array implementation (`Vec`) and an experimental benchmarking framework.
+A C++ project for benchmarking and comparing classical sorting algorithms using a custom dynamic array implementation (`Vec`).
 
-Implemented:
+The project was developed as part of an Algorithms course and focuses on practical performance analysis, complexity comparison, and experimental evaluation of sorting techniques.
+
+---
+
+## Features
+
+### Sorting Algorithms
 
 - Bubble Sort
 - Insertion Sort
@@ -11,36 +17,28 @@ Implemented:
 - Heap Sort
 - Shell Sort
 
-Custom data structure:
+### Custom Data Structure
 
-- Vec
+- `Vec` dynamic array implementation
+- Dynamic resizing
+- Deep copy semantics
+- Bounds-checked element access
+- Copy assignment operator
+- Stream output operator
 
-Benchmark:
+### Benchmarking
 
 - Random input generation
-- High-resolution timing (`QueryPerformanceCounter`)
+- High-resolution timing using `QueryPerformanceCounter`
 - Sorting correctness verification
 - CSV export
-- Performance graph generation
+- Automated graph generation
 
-Graph generation:
+---
 
-- Pandas
-- Matplotlib
+## Complexity Summary
 
-Generated data:
-
-- `data/data.csv`
-
-Generated graphs:
-
-- `graph_all_algorithms.png`
-- `graph_fast_algorithms.png`
-- `graph_quadratic_algorithms.png`
-
-Algorithm complexity:
-
-| Algorithm | Best Case | Average Case | Worst Case |
+| Algorithm | Best | Average | Worst |
 |------------|------------|------------|------------|
 | Bubble Sort | O(n) | O(n²) | O(n²) |
 | Insertion Sort | O(n) | O(n²) | O(n²) |
@@ -49,17 +47,28 @@ Algorithm complexity:
 | Heap Sort | O(n log n) | O(n log n) | O(n log n) |
 | Shell Sort | Depends on gap sequence | Typically better than O(n²) | Depends on gap sequence |
 
-Benchmark methodology:
+---
+
+## Benchmark Methodology
+
+For each input size:
 
 1. Generate a random input array.
 2. Create identical copies of the input.
 3. Run each sorting algorithm on the same data.
-4. Verify correctness using `isSorted(...)`.
-5. Measure execution time.
-6. Export results to CSV.
-7. Generate performance graphs.
+4. Measure execution time independently.
+5. Verify correctness using `isSorted(...)`.
+6. Export measurements to CSV.
 
-Typical output:
+Results are stored in:
+
+```text
+data/data.csv
+```
+
+---
+
+## Example Results
 
 ```text
 N       Bubble   Insertion   Merge   Quick   Heap   Shell
@@ -69,31 +78,45 @@ N       Bubble   Insertion   Merge   Quick   Heap   Shell
 2000    59.985   19.199      1.437   0.729   1.240  1.122
 ```
 
-Build:
+---
 
-```bash
-g++ src/main.cpp src/sorts.cpp src/Vec.cpp -o benchmark
-```
+## Graph Generation
 
-Run:
+Benchmark results can be visualized with:
 
-```bash
-./benchmark
-```
+- Pandas
+- Matplotlib
 
-or on Windows:
-
-```cmd
-benchmark.exe
-```
-
-Generate graphs:
+Generate graphs using:
 
 ```bash
 python data/plot_results.py
 ```
 
-Project structure:
+Generated figures:
+
+```text
+graph_all_algorithms.png
+graph_fast_algorithms.png
+graph_quadratic_algorithms.png
+```
+
+---
+
+## Observations
+
+Experimental results are consistent with theoretical complexity analysis.
+
+- Bubble Sort is the slowest algorithm for larger inputs.
+- Insertion Sort performs better than Bubble Sort but remains quadratic.
+- Merge Sort demonstrates stable O(n log n) growth.
+- Quick Sort is typically the fastest on random input data.
+- Heap Sort guarantees O(n log n) performance while sorting in-place.
+- Shell Sort significantly outperforms quadratic algorithms and remains competitive with Heap Sort.
+
+---
+
+## Project Structure
 
 ```text
 Algorithms-Sorting-Benchmark
@@ -114,7 +137,31 @@ Algorithms-Sorting-Benchmark
 └── README.md
 ```
 
-Technologies:
+---
+
+## Build
+
+Compile using GCC:
+
+```bash
+g++ src/main.cpp src/sorts.cpp src/Vec.cpp -o benchmark
+```
+
+Run:
+
+```bash
+./benchmark
+```
+
+Windows:
+
+```cmd
+benchmark.exe
+```
+
+---
+
+## Technologies
 
 - C++17
 - GCC / MinGW
@@ -123,19 +170,23 @@ Technologies:
 - Pandas
 - Matplotlib
 
-Future improvements:
+---
 
-- Average multiple benchmark runs
-- Additional input distributions:
+## Future Improvements
+
+- Multiple benchmark repetitions and averaging
+- Additional input distributions
   - Sorted arrays
   - Reverse-sorted arrays
   - Nearly sorted arrays
   - Duplicate-heavy arrays
-- Comparison with `std::sort`
+- Comparison against `std::sort`
 - Cross-platform timing using `std::chrono`
-- Unit testing
+- Automated testing
 
-Author:
+---
+
+## Author
 
 **Desire Roslin Dziele**  
 Computer Science Student  
