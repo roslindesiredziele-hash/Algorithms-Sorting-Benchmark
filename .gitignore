@@ -7,6 +7,7 @@ v18/
 *.db
 *.db-shm
 *.db-wal
+data/data.csv
 
 # Build outputs
 *.exe
