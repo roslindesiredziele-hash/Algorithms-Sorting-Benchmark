@@ -137,7 +137,7 @@ void QuickSort(Vec &V, int left, int right)
     QuickSort(V, pivotpos + 1, right);
 }
 
-void Heapify(Vec& V, int heapSize, int node)
+void Heapify(Vec &V, int heapSize, int node)
 {
     int largest = node;
 
@@ -164,5 +164,17 @@ void Heapify(Vec& V, int heapSize, int node)
 
 void HeapSort(Vec &V)
 {
+    int n = V.size();
 
+    for (int i = (n / 2) - 1; i >= 0; i--)
+    {
+        Heapify(V, n, i);
+    }
+
+    for (int end = n - 1; end > 0; end--)
+    {
+        SwapInt(V[0], V[end]);
+
+        Heapify(V, end, 0);
+    }
 }
