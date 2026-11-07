@@ -16,5 +16,7 @@ void QuickSort(Vec &V, int left, int right);
 void Heapify(Vec &V, int , int );
 void HeapSort(Vec &V);
 
+void ShellSort(Vec &V);
+
 
 #endif
