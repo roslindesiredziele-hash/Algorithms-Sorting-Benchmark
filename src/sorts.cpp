@@ -137,23 +137,32 @@ void QuickSort(Vec &V, int left, int right)
     QuickSort(V, pivotpos + 1, right);
 }
 
-void Heapify(Vec &V, int node)
+void Heapify(Vec& V, int heapSize, int node)
 {
-    int l = node * 2 + 1;
-    int r = node * 2 + 2;
+    int largest = node;
 
-    if (V[l] > V[node])
-        SwapInt(V[l], V[node]);
-    if (V[r] > V[node])
-        SwapInt(V[r], V[node]);
+    int left = 2 * node + 1;
+    int right = 2 * node + 2;
+
+    if (left < heapSize && V[left] > V[largest])
+    {
+        largest = left;
+    }
+
+    if (right < heapSize && V[right] > V[largest])
+    {
+        largest = right;
+    }
+
+    if (largest != node)
+    {
+        SwapInt(V[node], V[largest]);
+
+        Heapify(V, heapSize, largest);
+    }
 }
 
 void HeapSort(vec &V, int n)
 {
-    int lastnode = (n / 2) - 1;
 
-    for (i = lastParent; i >= 0; i--)
-    {
-        
-    }
 }
