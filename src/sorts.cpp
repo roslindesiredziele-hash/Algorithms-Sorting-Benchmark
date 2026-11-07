@@ -162,7 +162,7 @@ void Heapify(Vec& V, int heapSize, int node)
     }
 }
 
-void HeapSort(vec &V, int n)
+void HeapSort(Vec &V)
 {
 
 }
