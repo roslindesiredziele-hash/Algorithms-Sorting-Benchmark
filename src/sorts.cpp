@@ -134,5 +134,15 @@ void QuickSort(Vec &V, int left, int right)
     int pivotpos = i - 1;
 
     QuickSort(V, left, pivotpos - 1);
-    QuickSort(V, pivotpos+ 1, right);
+    QuickSort(V, pivotpos + 1, right);
+}
+
+void Heapify(Vec &V, int node, int n)
+{
+    if (n <= 1)
+        return;
+
+    int lastNode = (n / 2) - 1;
+    int l = lastNode*2 + 1;
+    int r = lastNode*2 + 2;
 }
