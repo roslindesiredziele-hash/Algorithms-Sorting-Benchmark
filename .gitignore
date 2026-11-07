@@ -2,15 +2,18 @@
 .vs/
 .vscode/
 v18/
+.venv
 
 # Databases
 *.db
 *.db-shm
 *.db-wal
 data/data.csv
+benchmark.exe
 
 # Build outputs
 *.exe
+*.csv
 
 # Object files
 *.o
