@@ -2,18 +2,29 @@
 .vs/
 .vscode/
 v18/
-.venv
+
+# Python virtual environments
+.venv/
+.venv314/
+.anaconda_projects
+
+# Python cache
+__pycache__/
+*.pyc
 
 # Databases
 *.db
 *.db-shm
 *.db-wal
+
+# Generated benchmark data
 data/data.csv
-benchmark.exe
+
+# Generated graphs
+*.png
 
 # Build outputs
 *.exe
-*.csv
 
 # Object files
 *.o
