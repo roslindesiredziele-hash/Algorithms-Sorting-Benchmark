@@ -64,6 +64,8 @@ int &Vec::get(int i)
 
 const int &Vec::get(int i) const
 {
+    if (i < 0 || i >= len)
+        throw std::out_of_range("Index out of range");
     return mem[i];
 }
 
