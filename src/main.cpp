@@ -4,18 +4,22 @@
 #include <cstdlib>
 #include <ctime>
 #include <windows.h>
+#include <fstream>
 
 using namespace std;
 
 int main()
 {
+    std::ofstream outfile("./data/data.csv");
+    outfile << "Input size" << "," << "BubbleSort Time" << "," << "InsertionSort Time " << "," << "MergeSort Time" << "," << "QuickSort Time" << "," << "HeapSort Time" << "," << "ShellSort Time" << std::endl;
+
     srand(time(NULL));
     LARGE_INTEGER t, t1, f;
     QueryPerformanceFrequency(&f);
 
-    cout << "OK\t\tN\tBubble\tInsertion\tMerge\tQuick" << endl;
+    cout << "OK\tN\tBubble\tInsertion\t\tMerge\t\tQuick\t\tHeap\t\tShell" << endl;
 
-    for (int factor = 100; factor <= 5000; factor += 100)
+    for (int factor = 20; factor <= 2000; factor += 20)
     {
         Vec V(1);
 
@@ -25,51 +29,64 @@ int main()
             V.push(num);
         }
 
-        Vec orMerge(V), orBub(V), orInsert(V), orQuick(V);
+        Vec orMerge(V), orBub(V), orInsert(V), orQuick(V), orHeap(V), orShell(V);
 
-        //  cout << "\nOriginal BubVector: " << orBub << "\t\t";
         QueryPerformanceCounter(&t);
         BubbleSort(orBub);
         QueryPerformanceCounter(&t1);
         double Bubtime = (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
-        /*cout << "Sorted: " << orBub << "\n"
-             << endl; */
 
-        //  cout << "\nOriginal BInsertVector: " << orInsert << "\t\t";
         QueryPerformanceCounter(&t);
         InsertionSort(orInsert);
         QueryPerformanceCounter(&t1);
         double Insertime = (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
-        /*  cout << "Sorted: " << orInsert << "\n"
-                << endl; */
 
-        // cout << "\nOriginal mergeVector: " << orMerge << "\t\t";
         QueryPerformanceCounter(&t);
         MergeSort(orMerge, 0, orMerge.size() - 1);
         QueryPerformanceCounter(&t1);
         double Mergetime = (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
-        /* cout << "Sorted: " << orMerge << "\n"
-              << endl; */
 
         QueryPerformanceCounter(&t);
-
         QuickSort(orQuick, 0, orQuick.size() - 1);
-
         QueryPerformanceCounter(&t1);
-
         double Quicktime = (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
+
+        QueryPerformanceCounter(&t);
+        HeapSort(orHeap);
+        QueryPerformanceCounter(&t1);
+        double Heaptime = (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
+
+        QueryPerformanceCounter(&t);
+        ShellSort(orShell);
+        QueryPerformanceCounter(&t1);
+        double Shelltime = (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
+
+        if (outfile.is_open())
+        {
+            outfile << factor << "," << Bubtime << "," << Insertime << "," << Mergetime << "," << Quicktime << "," << Heaptime << "," << Shelltime << std::endl;
+        }
+        else
+        {
+            std::cerr << "Unable to open file";
+        }
 
         cout << isSorted(orBub) << " "
              << isSorted(orInsert) << " "
              << isSorted(orMerge) << " "
-             << isSorted(orQuick) << endl;
+             << isSorted(orQuick) << " "
+             << isSorted(orHeap) << " "
+             << isSorted(orShell) << " "
+             << endl;
 
         cout << factor << "\t\t"
              << Bubtime << "\t\t"
              << Insertime << "\t\t"
              << Mergetime << "\t\t"
-             << Quicktime << endl;
+             << Quicktime << "\t\t"
+             << Heaptime << "\t\t"
+             << Shelltime << endl;
     }
+    outfile.close();
 
     return 0;
 }
