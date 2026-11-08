@@ -19,7 +19,7 @@ int main()
 
     cout << "OK\tN\tBubble\tInsertion\t\tMerge\t\tQuick\t\tHeap\t\tShell" << endl;
 
-    for (int factor = 20; factor <= 2000; factor += 20)
+    for (int factor = 5; factor <= 50; factor += 5)
     {
         Vec V(1);
 
