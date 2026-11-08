@@ -22,70 +22,119 @@ int main()
     << "ShellSort Time"
     << endl;
 
-    cout << "OK\tN\tBubble\tInsertion\t\tMerge\t\tQuick\t\tHeap\t\tShell" << endl;
-
     srand(time(NULL));
+
     LARGE_INTEGER t, t1, f;
     QueryPerformanceFrequency(&f);
 
-    for (int factor = 20; factor <= 2000; factor += 20)
+    const int runs = 10;
+
+    Vec sizes(1);
+    sizes.push(5);
+    sizes.push(10);
+    sizes.push(20);
+    sizes.push(30);
+    sizes.push(40);
+    sizes.push(50);
+    sizes.push(100);
+    sizes.push(200);
+    sizes.push(300);
+    sizes.push(400);
+    sizes.push(500);
+    sizes.push(1000);
+    sizes.push(1200);
+    sizes.push(1400);
+    sizes.push(1600);
+    sizes.push(1800);
+    sizes.push(2000);
+
+    cout << sizes << endl;
+
+    cout << "Input-sizes\tBubble\t\tInsertion\tMerge\t\tQuick\t\tHeap\t\tShell\t\tIsSorted" << endl;
+
+    for (int factor : sizes)
     {
         Vec V(1);
 
         for (int i = 0; i < factor; i++)
         {
-            int num = rand();
-            V.push(num);
+            V.push(rand());
         }
 
+        double bubbleTotal = 0;
+        double insertionTotal = 0;
+        double mergeTotal = 0;
+        double quickTotal = 0;
+        double heapTotal = 0;
+        double shellTotal = 0;
+
+        bool bubbleOK = true;
+        bool insertionOK = true;
+        bool mergeOK = true;
+        bool quickOK = true;
+        bool heapOK = true;
+        bool shellOK = true;
+
+        for (int run = 0; run < runs; run++)
+    {
         Vec orMerge(V), orBub(V), orInsert(V), orQuick(V), orHeap(V), orShell(V);
 
         QueryPerformanceCounter(&t);
         BubbleSort(orBub);
         QueryPerformanceCounter(&t1);
-        double Bubtime = (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
+        bubbleTotal += (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
+        bubbleOK &= isSorted(orBub);
 
         QueryPerformanceCounter(&t);
         InsertionSort(orInsert);
         QueryPerformanceCounter(&t1);
-        double Insertime = (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
+        insertionTotal += (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
+        insertionOK &= isSorted(orInsert);
 
         QueryPerformanceCounter(&t);
         MergeSort(orMerge, 0, orMerge.size() - 1);
         QueryPerformanceCounter(&t1);
-        double Mergetime = (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
+        mergeTotal += (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
+        mergeOK &= isSorted(orMerge);
 
         QueryPerformanceCounter(&t);
         QuickSort(orQuick, 0, orQuick.size() - 1);
         QueryPerformanceCounter(&t1);
-        double Quicktime = (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
+        quickTotal += (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
+         quickOK &= isSorted(orQuick);
 
         QueryPerformanceCounter(&t);
         HeapSort(orHeap);
         QueryPerformanceCounter(&t1);
-        double Heaptime = (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
+        heapTotal += (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
+        heapOK &= isSorted(orHeap);
 
         QueryPerformanceCounter(&t);
         ShellSort(orShell);
         QueryPerformanceCounter(&t1);
-        double Shelltime = (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
+        shellTotal += (t1.QuadPart - t.QuadPart) * 1000.0 / f.QuadPart;
+         shellOK &= isSorted(orShell);
+
+    }
+    
+    double Bubtime = bubbleTotal / runs;
+        double Insertime = insertionTotal / runs;
+        double Mergetime = mergeTotal / runs;
+        double Quicktime = quickTotal / runs;
+        double Heaptime = heapTotal / runs;
+        double Shelltime = shellTotal / runs;
+
 
         if (outfile.is_open())
         {
-            outfile << factor << "," << Bubtime << "," << Insertime << "," << Mergetime << "," << Quicktime << "," << Heaptime << "," << Shelltime << std::endl;
+            outfile << factor << "," << Bubtime << "," << Insertime << "," << Mergetime << "," << Quicktime << "," << Heaptime << "," << Shelltime << endl;
         }
         else
         {
             std::cerr << "Unable to open file";
         }
 
-        cout << isSorted(orBub) << " "
-             << isSorted(orInsert) << " "
-             << isSorted(orMerge) << " "
-             << isSorted(orQuick) << " "
-             << isSorted(orHeap) << " "
-             << isSorted(orShell) << " "
-             << endl;
+        
 
         cout << factor << "\t\t"
              << Bubtime << "\t\t"
@@ -93,8 +142,15 @@ int main()
              << Mergetime << "\t\t"
              << Quicktime << "\t\t"
              << Heaptime << "\t\t"
-             << Shelltime << endl;
+             << Shelltime << "\t\t"
+            << bubbleOK << " "
+            << insertionOK << " "
+            << mergeOK << " "
+            << quickOK << " "
+            << heapOK << " "
+            << shellOK << endl;
     }
+
     outfile.close();
 
     return 0;
