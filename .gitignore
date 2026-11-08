@@ -6,7 +6,7 @@ v18/
 # Python virtual environments
 .venv/
 .venv314/
-.anaconda_projects
+anaconda_projects/
 
 # Python cache
 __pycache__/
@@ -22,6 +22,7 @@ data/data.csv
 
 # Generated graphs
 *.png
+graphs/
 
 # Build outputs
 *.exe
