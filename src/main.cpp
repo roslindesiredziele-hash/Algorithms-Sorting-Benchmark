@@ -13,6 +13,13 @@ using namespace std;
 int main()
 {
     ofstream outfile("./data/data.csv");
+
+     if (!outfile)
+        {
+            std::cerr << "Unable to open data.csv\n";
+            return 1;
+        }
+        
     outfile
     << "InputSize,"
     << "BubbleSort,"
@@ -52,6 +59,8 @@ int main()
     cout << sizes << endl;
 
     cout << "Input-sizes\tBubble\t\tInsertion\tMerge\t\tQuick\t\tHeap\t\tShell\t\tIsSorted" << endl;
+
+    cout << fixed << setprecision(3);
 
     for (int factor : sizes)
     {
@@ -124,13 +133,6 @@ int main()
         double Quicktime = quickTotal / runs;
         double Heaptime = heapTotal / runs;
         double Shelltime = shellTotal / runs;
-
-
-        if (!outfile)
-        {
-            std::cerr << "Unable to open data.csv\n";
-            return 1;
-        }
 
         outfile << factor << "," << Bubtime << "," << Insertime << "," << Mergetime << "," << Quicktime << "," << Heaptime << "," << Shelltime << endl;
 
