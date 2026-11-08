@@ -42,14 +42,13 @@ public:
 
     void reverse();
     void reverse(int l, int r);
-
     void rotate(int x);
 
     int* begin();
-int* end();
-
-const int* begin() const;
-const int* end() const;
+    int* end();
+    
+    const int* begin() const;
+    const int* end() const;
 
     Vec(const Vec &other);
     Vec &operator=(Vec cpy);
