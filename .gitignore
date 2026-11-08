@@ -17,11 +17,6 @@ __pycache__/
 *.db-shm
 *.db-wal
 
-# Generated benchmark data
-data/data.csv
-
-# Generated graphs
-
 # Build outputs
 *.exe
 
