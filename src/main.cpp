@@ -6,6 +6,7 @@
 #include <ctime>
 #include <windows.h>
 #include <fstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -13,13 +14,13 @@ int main()
 {
     ofstream outfile("./data/data.csv");
     outfile
-    << "Input size,"
-    << "BubbleSort Time,"
-    << "InsertionSort Time,"
-    << "MergeSort Time,"
-    << "QuickSort Time,"
-    << "HeapSort Time,"
-    << "ShellSort Time"
+    << "InputSize,"
+    << "BubbleSort,"
+    << "InsertionSort,"
+    << "MergeSort,"
+    << "QuickSort,"
+    << "HeapSort,"
+    << "ShellSort"
     << endl;
 
     srand(time(NULL));
@@ -125,14 +126,13 @@ int main()
         double Shelltime = shellTotal / runs;
 
 
-        if (outfile.is_open())
+        if (!outfile)
         {
-            outfile << factor << "," << Bubtime << "," << Insertime << "," << Mergetime << "," << Quicktime << "," << Heaptime << "," << Shelltime << endl;
+            std::cerr << "Unable to open data.csv\n";
+            return 1;
         }
-        else
-        {
-            std::cerr << "Unable to open file";
-        }
+
+        outfile << factor << "," << Bubtime << "," << Insertime << "," << Mergetime << "," << Quicktime << "," << Heaptime << "," << Shelltime << endl;
 
         
 
