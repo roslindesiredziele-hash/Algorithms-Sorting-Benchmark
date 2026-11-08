@@ -210,6 +210,26 @@ void Vec::rotate(int x)
     reverse(x, len - 1); // reverse second part
 }
 
+int* Vec::begin()
+{
+    return mem;
+}
+
+int* Vec::end()
+{
+    return mem + len;
+}
+
+const int* Vec::begin() const
+{
+    return mem;
+}
+
+const int* Vec::end() const
+{
+    return mem + len;
+}
+
 std::ostream &operator<<(std::ostream &ostr, const Vec &V)
 {
     ostr << "[";

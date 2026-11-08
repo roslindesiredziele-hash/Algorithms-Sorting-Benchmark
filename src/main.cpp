@@ -16,10 +16,10 @@ int main()
 
      if (!outfile)
         {
-            std::cerr << "Unable to open data.csv\n";
+            cerr << "Unable to open data.csv\n";
             return 1;
         }
-        
+
     outfile
     << "InputSize,"
     << "BubbleSort,"
@@ -35,7 +35,7 @@ int main()
     LARGE_INTEGER t, t1, f;
     QueryPerformanceFrequency(&f);
 
-    const int runs = 10;
+    const int runs = 20;
 
     Vec sizes(1);
     sizes.push(5);
@@ -55,8 +55,6 @@ int main()
     sizes.push(1600);
     sizes.push(1800);
     sizes.push(2000);
-
-    cout << sizes << endl;
 
     cout << "Input-sizes\tBubble\t\tInsertion\tMerge\t\tQuick\t\tHeap\t\tShell\t\tIsSorted" << endl;
 
@@ -126,6 +124,12 @@ int main()
          shellOK &= isSorted(orShell);
 
     }
+
+    if(!bubbleOK || !insertionOK || !mergeOK || !quickOK || !heapOK || !shellOK)
+         {
+            cerr << "Sorting failed\n";
+            return 1;
+         }
     
     double Bubtime = bubbleTotal / runs;
         double Insertime = insertionTotal / runs;
