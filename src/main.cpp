@@ -1,6 +1,7 @@
-#include <iostream>
 #include "Vec.h"
 #include "sorts.h"
+
+#include <iostream>
 #include <cstdlib>
 #include <ctime>
 #include <windows.h>
@@ -10,14 +11,22 @@ using namespace std;
 
 int main()
 {
-    std::ofstream outfile("./data/data.csv");
-    outfile << "Input size" << "," << "BubbleSort Time" << "," << "InsertionSort Time " << "," << "MergeSort Time" << "," << "QuickSort Time" << "," << "HeapSort Time" << "," << "ShellSort Time" << std::endl;
+    ofstream outfile("./data/data.csv");
+    outfile
+    << "Input size,"
+    << "BubbleSort Time,"
+    << "InsertionSort Time,"
+    << "MergeSort Time,"
+    << "QuickSort Time,"
+    << "HeapSort Time,"
+    << "ShellSort Time"
+    << endl;
+
+    cout << "OK\tN\tBubble\tInsertion\t\tMerge\t\tQuick\t\tHeap\t\tShell" << endl;
 
     srand(time(NULL));
     LARGE_INTEGER t, t1, f;
     QueryPerformanceFrequency(&f);
-
-    cout << "OK\tN\tBubble\tInsertion\t\tMerge\t\tQuick\t\tHeap\t\tShell" << endl;
 
     for (int factor = 20; factor <= 2000; factor += 20)
     {

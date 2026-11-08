@@ -27,7 +27,7 @@ plt.yscale("log")
 plt.legend()
 plt.grid(True)
 
-plt.savefig("graphs/graph_all_algorithms.png", dpi=300)
+plt.savefig("report/graph_all_algorithms.png", dpi=300)
 plt.close()
 
 # --------------------------
@@ -48,7 +48,7 @@ plt.yscale("log")
 plt.legend()
 plt.grid(True)
 
-plt.savefig("graphs/graph_fast_algorithms.png", dpi=300)
+plt.savefig("report/graph_fast_algorithms.png", dpi=300)
 plt.close()
 
 # --------------------------
@@ -66,7 +66,7 @@ plt.ylabel("Execution Time (ms)")
 plt.legend()
 plt.grid(True)
 
-plt.savefig("graphs/graph_quadratic_algorithms.png", dpi=300)
+plt.savefig("report/graph_quadratic_algorithms.png", dpi=300)
 plt.close()
 
 print("Graphs generated successfully.")
