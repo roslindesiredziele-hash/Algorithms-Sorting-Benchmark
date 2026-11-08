@@ -58,7 +58,7 @@ int main()
 
     cout << "Input-sizes\tBubble\t\tInsertion\tMerge\t\tQuick\t\tHeap\t\tShell\t\tIsSorted" << endl;
 
-    cout << fixed << setprecision(3);
+    cout << fixed << setprecision(4);
 
     for (int factor : sizes)
     {
