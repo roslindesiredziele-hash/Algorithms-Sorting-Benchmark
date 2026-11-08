@@ -21,7 +21,6 @@ __pycache__/
 data/data.csv
 
 # Generated graphs
-*.png
 
 # Build outputs
 *.exe
