@@ -22,7 +22,6 @@ data/data.csv
 
 # Generated graphs
 *.png
-graphs/
 
 # Build outputs
 *.exe
