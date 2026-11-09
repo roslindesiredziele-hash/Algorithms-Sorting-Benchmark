@@ -172,20 +172,6 @@ benchmark.exe
 
 ---
 
-## Future Improvements
-
-- Multiple benchmark repetitions and averaging
-- Additional input distributions
-  - Sorted arrays
-  - Reverse-sorted arrays
-  - Nearly sorted arrays
-  - Duplicate-heavy arrays
-- Comparison against `std::sort`
-- Cross-platform timing using `std::chrono`
-- Automated testing
-
----
-
 ## Author
 
 **Desire Roslin Dziele**  
