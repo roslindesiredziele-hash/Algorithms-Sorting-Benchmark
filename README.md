@@ -71,11 +71,11 @@ data/data.csv
 ## Example Results
 
 ```text
-N       Bubble   Insertion   Merge   Quick   Heap   Shell
+InputSize    Bubble   Insertion   Merge   Quick   Heap   Shell
 
-100     0.196    0.078       0.096   0.034   0.050  0.037
-1000    17.149   6.811       1.098   0.404   0.806  0.668
-2000    59.985   19.199      1.437   0.729   1.240  1.122
+100          0.196    0.078       0.096   0.034   0.050  0.037
+1000         17.149   6.811       1.098   0.404   0.806  0.668
+2000         59.985   19.199      1.437   0.729   1.240  1.122
 ```
 
 ---
