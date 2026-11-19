@@ -1,14 +1,16 @@
 # Algorithms Sorting Benchmark
 
+![Build Status](https://github.com/YOUR_USERNAME/Algorithms-Sorting-Benchmark/actions/workflows/ci.yml/badge.svg)
+
 A C++ project for benchmarking and comparing classical sorting algorithms using a custom dynamic array implementation (`Vec`).
 
-The project was developed as part of an Algorithms course and focuses on practical performance analysis, complexity comparison, and experimental evaluation of sorting techniques.
+The project was developed as part of the **Algorithms I** course and focuses on practical performance analysis, complexity comparison, implementation quality, experimental evaluation, automated testing, and performance visualization.
 
 ---
 
 ## Features
 
-### Sorting Algorithms
+### Implemented Sorting Algorithms
 
 - Bubble Sort
 - Insertion Sort
@@ -19,29 +21,39 @@ The project was developed as part of an Algorithms course and focuses on practic
 
 ### Custom Data Structure
 
-- `Vec` dynamic array implementation
+The project includes a custom dynamic array implementation named `Vec` featuring:
+
 - Dynamic resizing
 - Deep copy semantics
-- Bounds-checked element access
 - Copy assignment operator
-- Stream output operator
+- Bounds-checked element access
 - Iterator support (`begin()` / `end()`)
+- Stream output operator
+- Aggregate operations (`sum()`, `avg()`)
+- Rotation and reversal utilities
 
 ### Benchmarking
 
 - Random input generation
-- High-resolution timing using `QueryPerformanceCounter`
-- Sorting correctness verification
-- 20-run averaged measurements
-- CSV export
+- High-resolution timing using `QueryPerformanceCounter()`
+- Sorting correctness verification using `isSorted()`
+- 100 benchmark repetitions per input size
+- CSV export of benchmark results
 - Automated graph generation
+
+### Testing & Quality Assurance
+
+- Catch2 unit testing framework
+- CTest integration
+- GitHub Actions Continuous Integration
+- Automated verification of sorting correctness
 
 ---
 
 ## Complexity Summary
 
 | Algorithm | Best Case | Average Case | Worst Case |
-|------------|------------|------------|------------|
+|-----------|-----------|-------------|------------|
 | Bubble Sort | O(n) | O(n²) | O(n²) |
 | Insertion Sort | O(n) | O(n²) | O(n²) |
 | Merge Sort | O(n log n) | O(n log n) | O(n log n) |
@@ -53,31 +65,43 @@ The project was developed as part of an Algorithms course and focuses on practic
 
 ## Benchmark Methodology
 
-For each input size:
+For each benchmark size:
 
 1. Generate a random input array.
-2. Create identical copies of the input.
+2. Create identical copies of the input data.
 3. Execute each sorting algorithm on the same data.
-4. Repeat the benchmark 20 times.
-5. Compute the average execution time.
+4. Repeat the benchmark **100 times**.
+5. Calculate the average execution time.
 6. Verify correctness using `isSorted(...)`.
 7. Export results to CSV.
 
-Input sizes were selected to match the assignment requirements:
+### Benchmark Input Sizes
 
-### Small Inputs
-
-```text
-5, 10, 20, 30, 40, 50
-```
-
-### Larger Inputs
+#### Very Small Inputs
 
 ```text
-100, 200, 300, 400, 500
+5, 10, 15, 20, 25
 ```
 
-### Superlarge Inputs
+#### Small Inputs
+
+```text
+30, 35, 40, 45, 50
+```
+
+#### Transition Region
+
+```text
+55, 60, 65, 70, 75, 80, 85, 90, 95, 100
+```
+
+#### Medium Inputs
+
+```text
+200, 300, 400, 500
+```
+
+#### Large Inputs
 
 ```text
 1000, 1200, 1400, 1600, 1800, 2000
@@ -91,79 +115,274 @@ data/data.csv
 
 ---
 
-## Example Results
+## Testing
 
-```text
-InputSize    Bubble   Insertion   Merge   Quick   Heap   Shell
+Unit tests were implemented using the **Catch2** framework.
 
-100          0.180    0.070       0.089   0.031   0.053   0.046
-1000         15.453   5.450       0.792   0.402   0.666   0.549
-2000         56.838   19.534      1.513   0.741   1.266   1.129
-```
+### Covered Functionality
 
----
+The test suite verifies:
 
-## Results
+- Bubble Sort correctness
+- Insertion Sort correctness
+- Merge Sort correctness
+- Quick Sort correctness
+- Heap Sort correctness
+- Shell Sort correctness
+- Vector operations
+- Sorted-order validation
+- Size preservation after sorting
 
-### All Algorithms
-
-![All Algorithms Benchmark](report/graph_all_algorithms.png)
-
-### Efficient Algorithms (Merge, Quick, Heap, Shell)
-
-![Efficient Algorithms Benchmark](report/graph_fast_algorithms.png)
-
-### Quadratic Algorithms (Bubble, Insertion)
-
-![Quadratic Algorithms Benchmark](report/graph_quadratic_algorithms.png)
-
----
-
-## Graph Generation
-
-Benchmark results can be visualized using:
-
-- Pandas
-- Matplotlib
-
-Generate graphs with:
+### Run Tests
 
 ```bash
-python data/plot_results.py
+ctest --test-dir build --output-on-failure
 ```
 
-Generated figures:
+Example output:
 
 ```text
-graph_all_algorithms.png
-graph_fast_algorithms.png
-graph_quadratic_algorithms.png
+Start 1: AlgorithmsSortingBenchmarkTests
+1/1 Test #1: AlgorithmsSortingBenchmarkTests ... Passed
+
+100% tests passed out of 1
+```
+
+Although CTest reports a single executable, the executable internally contains multiple Catch2 test cases.
+
+---
+
+## Continuous Integration
+
+The project uses **GitHub Actions** to automatically:
+
+- Configure the project using CMake
+- Build the benchmark application
+- Build the test suite
+- Execute all unit tests
+
+on every push and pull request.
+
+Workflow location:
+
+```text
+.github/workflows/ci.yml
 ```
 
 ---
 
-## Observations
+## Example Results
 
-Experimental results are consistent with theoretical complexity analysis.
+### Measured Average Execution Times (ms)
 
-- Bubble Sort is the slowest algorithm for larger inputs.
-- Insertion Sort performs better than Bubble Sort but remains quadratic.
-- Merge Sort demonstrates stable O(n log n) growth.
-- Quick Sort is consistently the fastest algorithm on randomly generated input.
-- Heap Sort guarantees O(n log n) performance while sorting in-place.
-- Shell Sort significantly outperforms quadratic algorithms and remains competitive with Heap Sort.
+| Input Size | Bubble Sort | Insertion Sort | Merge Sort | Quick Sort | Heap Sort | Shell Sort |
+|------------|------------:|---------------:|-----------:|-----------:|----------:|-----------:|
+| 100 | 0.0602 | 0.0222 | 0.0243 | 0.0112 | 0.0165 | 0.0128 |
+| 1000 | 6.4617 | 2.2199 | 0.3129 | 0.1579 | 0.2646 | 0.2228 |
+| 2000 | 25.8742 | 8.7669 | 0.6688 | 0.3413 | 0.5771 | 0.5115 |
+
+The results clearly show the separation between quadratic algorithms and the more scalable O(n log n) algorithms as input size increases.
+
+---
+
+# Results and Analysis
+
+The benchmark results were visualized using seven figures covering different input-size ranges and algorithm groups.
+
+---
+
+## Figure 1 – Very Small Inputs (5–25)
+
+![Very Small Inputs](report/figure1_very_small_inputs.png)
+
+### Observations
+
+- All algorithms perform similarly for very small input sizes.
+- Constant factors dominate execution time.
+- Complexity differences are not yet significant.
+- Bubble Sort remains competitive because the datasets are extremely small.
+- Quick Sort and Shell Sort already exhibit slightly lower execution times than the remaining algorithms.
+
+---
+
+## Figure 2 – Small Inputs (30–50)
+
+![Small Inputs](report/figure2_small_inputs.png)
+
+### Observations
+
+- Performance differences begin to emerge.
+- Bubble Sort and Insertion Sort start growing faster than the remaining algorithms.
+- Quick Sort consistently ranks among the fastest algorithms.
+- Merge Sort experiences additional overhead caused by recursion and temporary storage.
+- Shell Sort performs surprisingly well for this input range.
+
+---
+
+## Figure 3 – Transition Region (55–100)
+
+![Transition Region](report/figure3_transition_region.png)
+
+### Observations
+
+- The distinction between O(n²) and O(n log n) algorithms becomes increasingly visible.
+- Bubble Sort and Insertion Sort begin diverging from the remaining algorithms.
+- Quick Sort, Heap Sort, Merge Sort, and Shell Sort remain relatively close together.
+- Complexity effects become more important than implementation overhead.
+- This region marks the beginning of noticeable scalability differences.
+
+---
+
+## Figure 4 – Medium-to-Large Inputs (100–2000)
+
+![Medium to Large Inputs](report/figure4_medium_large_inputs.png)
+
+### Observations
+
+- Algorithmic complexity becomes the dominant factor.
+- Bubble Sort execution time increases dramatically.
+- Insertion Sort remains significantly faster than Bubble Sort but still exhibits quadratic growth.
+- The O(n log n) algorithms scale efficiently.
+- Quick Sort consistently achieves the lowest execution times.
+- The performance gap between quadratic and logarithmic algorithms widens rapidly as input size increases.
+
+---
+
+## Figure 5 – Quadratic Algorithms Comparison
+
+![Quadratic Algorithms](report/figure5_quadratic_algorithms.png)
+
+### Observations
+
+- Both algorithms exhibit the expected O(n²) growth.
+- Insertion Sort consistently outperforms Bubble Sort.
+- The performance difference becomes increasingly pronounced as input size grows.
+
+At 2000 elements:
+
+```text
+Bubble Sort    : 25.8742 ms
+Insertion Sort : 8.7669 ms
+```
+
+Insertion Sort is approximately:
+
+```text
+2.95× faster
+```
+
+than Bubble Sort despite sharing the same asymptotic complexity.
+
+### Interpretation
+
+Although Bubble Sort and Insertion Sort belong to the same complexity class, Insertion Sort performs fewer unnecessary swaps and therefore achieves substantially better practical performance.
+
+---
+
+## Figure 6 – O(n log n) Algorithms Comparison
+
+![O(n log n) Algorithms](report/figure6_nlogn_algorithms.png)
+
+### Observations
+
+- All algorithms scale according to O(n log n) behavior.
+- Quick Sort consistently achieves the best performance.
+- Shell Sort remains surprisingly competitive.
+- Heap Sort provides stable O(n log n) performance.
+- Merge Sort exhibits predictable growth but incurs additional memory overhead.
+
+### Performance at 2000 Elements
+
+```text
+Quick Sort : 0.3413 ms
+Shell Sort : 0.5115 ms
+Heap Sort  : 0.5771 ms
+Merge Sort : 0.6688 ms
+```
+
+### Interpretation
+
+Quick Sort benefits from excellent cache locality and low constant factors on randomly generated input, explaining its superior performance.
+
+---
+
+## Figure 7 – Full Comparison (Logarithmic Scale)
+
+![Full Comparison Logarithmic Scale](report/figure7_full_comparison_log.png)
+
+### Observations
+
+- The logarithmic scaleithms.
+- The four efficient algorithms cluster together and remain highly scalable.
+- The gap between Bubble Sort and Quick Sort becomes striking at large input sizes.
+
+### Performance at 2000 Elements
+
+```text
+Bubble Sort : 25.8742 ms
+Quick Sort  : 0.3413 ms
+```
+
+Bubble Sort is approximately:
+
+```text
+75.8× slower
+```
+
+than Quick Sort.
+
+### Interpretation
+
+The logarithmic graph provides the clearest overall picture of scalability and confirms the theoretical complexity analysis.
+
+---
+
+## Key Findings
+
+### Fastest Algorithm
+
+**Quick Sort** achieved the best overall performance across all tested input sizes.
+
+### Slowest Algorithm
+
+**Bubble Sort** consistently produced the highest execution times.
+
+### Best Quadratic Algorithm
+
+**Insertion Sort** significantly outperformed Bubble Sort despite sharing the same O(n²) complexity class.
+
+### Most Scalable Algorithms
+
+The algorithms exhibiting O(n log n) growth:
+
+- Quick Sort
+- Shell Sort
+- Heap Sort
+- Merge Sort
+
+all scaled effectively throughout the benchmark range.
+
+### Experimental Validation
+
+The benchmark results closely match theoretical expectations:
+
+- Bubble Sort and Insertion Sort exhibit quadratic growth.
+- Merge Sort, Heap Sort, and Quick Sort exhibit O(n log n) growth.
+- Shell Sort performs substantially better than quadratic algorithms and remains competitive with the O(n log n) algorithms.
 
 ---
 
 ## Conclusion
 
-This project successfully implemented and benchmarked six classical sorting algorithms using a custom dynamic array implementation (`Vec`).
+This project successfully implemented and benchmarked six classical sorting algorithms using a custom dynamic array implementation.
 
-The measured running times closely match the theoretical complexity classes studied in Algorithm Design and Analysis. Bubble Sort and Insertion Sort become increasingly inefficient as input size grows, while Merge Sort, Quick Sort, Heap Sort, and Shell Sort scale much more effectively.
+The measured execution times closely match the theoretical complexity classes studied in Algorithm Design and Analysis. Bubble Sort and Insertion Sort become increasingly inefficient as input size grows, while Merge Sort, Heap Sort, Quick Sort, and Shell Sort scale significantly more effectively.
 
-Among all tested algorithms, Quick Sort achieved the best overall performance on randomly generated datasets. Heap Sort and Merge Sort demonstrated the expected O(n log n) behavior, while Shell Sort provided surprisingly competitive results despite its dependence on the chosen gap sequence.
+Among all tested algorithms, **Quick Sort achieved the best overall performance**, completing the 2000-element benchmark in only **0.3413 ms**. In comparison, **Bubble Sort required 25.8742 ms**, making it approximately **76 times slower** on the same input.
 
-The benchmark clearly demonstrates the practical impact of algorithmic complexity and highlights the importance of selecting efficient algorithms for large data sets.
+Insertion Sort consistently outperformed Bubble Sort despite both algorithms belonging to the O(n²) complexity class, highlighting the importance of implementation details and constant factors in practical performance.
+
+Overall, the benchmark demonstrates how asymptotic complexity predicts long-term scalability while practical measurements reveal the real-world impact of algorithm design choices.
 
 ---
 
@@ -172,14 +391,25 @@ The benchmark clearly demonstrates the practical impact of algorithmic complexit
 ```text
 Algorithms-Sorting-Benchmark
 │
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│
 ├── data/
 │   ├── data.csv
 │   └── plot_results.py
 │
 ├── report/
-│   ├── graph_all_algorithms.png
-│   ├── graph_fast_algorithms.png
-│   └── graph_quadratic_algorithms.png
+│   ├── figure1_very_small_inputs.png
+│   ├── figure2_small_inputs.png
+│   ├── figure3_transition_region.png
+│   ├── figure4_medium_large_inputs.png
+│   ├── figure5_quadratic_algorithms.png
+│   ├── figure6_nlogn_algorithms.png
+│   └── figure7_full_comparison_log.png
+│
+├── external/
+│   └── catch.hpp
 │
 ├── src/
 │   ├── main.cpp
@@ -188,6 +418,10 @@ Algorithms-Sorting-Benchmark
 │   ├── sorts.cpp
 │   └── sorts.h
 │
+├── tests/
+│   └── AlgorithmsSortingBenchmark_TDD.cpp
+│
+├── CMakeLists.txt
 └── README.md
 ```
 
@@ -195,22 +429,28 @@ Algorithms-Sorting-Benchmark
 
 ## Build
 
-Compile using GCC:
+### Configure
 
 ```bash
-g++ src/main.cpp src/sorts.cpp src/Vec.cpp -o benchmark
+cmake -S . -B build
 ```
 
-Run:
+### Build
 
 ```bash
-./benchmark
+cmake --build build --config Release
 ```
 
-Windows:
+### Run Tests
 
-```cmd
-benchmark.exe
+```bash
+ctest --test-dir build --output-on-failure
+```
+
+### Run Benchmark
+
+```bash
+build/Release/benchmark.exe
 ```
 
 ---
@@ -218,30 +458,33 @@ benchmark.exe
 ## Technologies
 
 - C++17
-- GCC / MinGW
-- Git
+- CMake
+- Catch2
+- CTest
+- GitHub Actions
 - Python
 - Pandas
 - Matplotlib
+- Git
 
 ---
 
 ## Future Improvements
 
-- Additional benchmark repetitions and statistical analysis
-- Benchmark comparison with `std::sort`
-- Additional input distributions:
+- Comparison against `std::sort`
+- Statistical confidence intervals
+- Additional input distributions
   - Sorted arrays
   - Reverse-sorted arrays
   - Nearly sorted arrays
   - Duplicate-heavy arrays
 - Cross-platform timing using `std::chrono`
-- Automated testing framework
-- Comparison of different Shell Sort gap sequences
+- Alternative Shell Sort gap sequences
 
 ---
 
 ## Author
 
 **Desire Roslin Dziele**  
-Computer Science Student
+Computer Science Student  
+University of Łódź
