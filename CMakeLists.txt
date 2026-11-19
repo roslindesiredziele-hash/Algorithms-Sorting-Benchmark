@@ -4,7 +4,6 @@ project(AlgorithmsSortingBenchmark)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-------------------------
 
 add_executable(
     benchmark
@@ -12,7 +11,6 @@ add_executable(
     src/Vec.cpp
     src/sorts.cpp
 )
------------------------
 
 enable_testing()
 
