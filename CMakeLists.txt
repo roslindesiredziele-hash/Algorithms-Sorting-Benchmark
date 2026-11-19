@@ -9,6 +9,7 @@ enable_testing()
 
 add_executable(
     AlgorithmsSortingBenchmark_TDD
+    src/Vec.cpp
     src/sorts.cpp
     tests/AlgorithmsSortingBenchmark_TDD.cpp
 )
