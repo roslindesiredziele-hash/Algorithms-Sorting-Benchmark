@@ -1,6 +1,6 @@
 # Algorithms Sorting Benchmark
 
-[![Build Status](https://github.com/roslindesiredziele-hash/Algorithms-Sorting-Benchmark/actions/workflows/ci.yml/badge.svg)]
+[![C++ Build and Test](https://github.com/roslindesiredziele-hash/Algorithms-Sorting-Benchmark/actions/workflows/ci.yml/badge.svg)]
 (https://github.com/roslindesiredziele-hash/Algorithms-Sorting-Benchmark/actions/workflows/ci.yml)
 
 A C++ project for benchmarking and comparing classical sorting algorithms using a custom dynamic array implementation (`Vec`).
