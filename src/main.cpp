@@ -35,7 +35,7 @@ int main()
     LARGE_INTEGER t, t1, f;
     QueryPerformanceFrequency(&f);
 
-    const int runs = 20;
+    const int runs = 100;
 
     Vec sizes(1);
     sizes.push(5);
