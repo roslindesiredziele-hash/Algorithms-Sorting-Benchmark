@@ -1,75 +1,183 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from pathlib import Path
 
-# Load CSV
+# ----------------------------
+# Load data
+# ----------------------------
+
 df = pd.read_csv("data/data.csv")
-
-# Rename columns if Excel inserted spaces
 df.columns = [c.strip() for c in df.columns]
 
-# --------------------------
-# Graph 1: All Algorithms
-# --------------------------
+Path("report").mkdir(exist_ok=True)
 
-plt.figure(figsize=(12, 6))
+# ----------------------------
+# Helper Function
+# ----------------------------
 
-plt.plot(df["InputSize"], df["BubbleSort"], label="Bubble Sort")
-plt.plot(df["InputSize"], df["InsertionSort"], label="Insertion Sort")
-plt.plot(df["InputSize"], df["MergeSort"], label="Merge Sort")
-plt.plot(df["InputSize"], df["QuickSort"], label="Quick Sort")
-plt.plot(df["InputSize"], df["HeapSort"], label="Heap Sort")
-plt.plot(df["InputSize"], df["ShellSort"], label="Shell Sort")
+def plot_algorithms(data, algorithms, title, filename, log_scale=False):
+    plt.figure(figsize=(12, 6))
 
-plt.title("Sorting Algorithms Performance Comparison")
-plt.xlabel("InputSize (n)")
-plt.ylabel("Execution Time(ms)")
-plt.yscale("log")
-plt.legend()
-plt.grid(True)
-plt.tight_layout()
+    for algo in algorithms:
+        plt.plot(
+            data["InputSize"],
+            data[algo],
+            marker="o",
+            linewidth=2,
+            label=algo.replace("Sort", " Sort")
+        )
 
-plt.savefig("report/graph_all_algorithms.png", dpi=300)
-plt.close()
+    plt.title(title)
+    plt.xlabel("Input Size (n)")
+    plt.ylabel("Execution Time (ms)")
 
-# --------------------------
-# Graph 2: Fast Algorithms
-# --------------------------
+    if log_scale:
+        plt.yscale("log")
 
-plt.figure(figsize=(12, 6))
+    plt.grid(True, linestyle="--", alpha=0.7)
+    plt.legend()
+    plt.tight_layout()
 
-plt.plot(df["InputSize"], df["MergeSort"], label="Merge Sort")
-plt.plot(df["InputSize"], df["QuickSort"], label="Quick Sort")
-plt.plot(df["InputSize"], df["HeapSort"], label="Heap Sort")
-plt.plot(df["InputSize"], df["ShellSort"], label="Shell Sort")
+    plt.savefig(f"report/{filename}", dpi=300)
+    plt.close()
 
-plt.title("O(n log n) Algorithms Comparison")
-plt.xlabel("InputSize (n)")
-plt.ylabel("Execution Time(ms)")
-plt.yscale("log")
-plt.legend()
-plt.grid(True)
-plt.tight_layout()
 
-plt.savefig("report/graph_fast_algorithms.png", dpi=300)
-plt.close()
+# =====================================================
+# Figure 1: Very Small Inputs (5–25)
+# =====================================================
 
-# --------------------------
-# Graph 3: Quadratic Algorithms
-# --------------------------
+small_25 = df[df["InputSize"] <= 25]
 
-plt.figure(figsize=(12, 6))
+plot_algorithms(
+    small_25,
+    [
+        "BubbleSort",
+        "InsertionSort",
+        "MergeSort",
+        "QuickSort",
+        "HeapSort",
+        "ShellSort"
+    ],
+    "Very Small Inputs (5-25)",
+    "figure1_very_small_inputs.png"
+)
 
-plt.plot(df["InputSize"], df["BubbleSort"], label="Bubble Sort")
-plt.plot(df["InputSize"], df["InsertionSort"], label="Insertion Sort")
+# =====================================================
+# Figure 2: Small Inputs (25–50)
+# =====================================================
 
-plt.title("Quadratic Sorting Algorithms Comparison")
-plt.xlabel("InputSize (n)")
-plt.ylabel("Execution Time(ms)")
-plt.legend()
-plt.grid(True)
-plt.tight_layout()
+range_25_50 = df[(df["InputSize"] >= 25) &
+                 (df["InputSize"] <= 50)]
 
-plt.savefig("report/graph_quadratic_algorithms.png", dpi=300)
-plt.close()
+plot_algorithms(
+    range_25_50,
+    [
+        "BubbleSort",
+        "InsertionSort",
+        "MergeSort",
+        "QuickSort",
+        "HeapSort",
+        "ShellSort"
+    ],
+    "Small Inputs (25-50)",
+    "figure2_small_inputs.png"
+)
 
-print("Graphs generated successfully.")
+# =====================================================
+# Figure 3: Transition Region (50–100)
+# =====================================================
+
+range_50_100 = df[(df["InputSize"] >= 50) &
+                  (df["InputSize"] <= 100)]
+
+plot_algorithms(
+    range_50_100,
+    [
+        "BubbleSort",
+        "InsertionSort",
+        "MergeSort",
+        "QuickSort",
+        "HeapSort",
+        "ShellSort"
+    ],
+    "Transition Region (50-100)",
+    "figure3_transition_region.png"
+)
+
+# =====================================================
+# Figure 4: Medium-to-Large Inputs (100–2000)
+# =====================================================
+
+large_inputs = df[df["InputSize"] >= 100]
+
+plot_algorithms(
+    large_inputs,
+    [
+        "BubbleSort",
+        "InsertionSort",
+        "MergeSort",
+        "QuickSort",
+        "HeapSort",
+        "ShellSort"
+    ],
+    "Medium-to-Large Inputs (100-2000)",
+    "figure4_medium_large_inputs.png"
+)
+
+# =====================================================
+# Figure 5: Quadratic Algorithms Only
+# =====================================================
+
+plot_algorithms(
+    df,
+    [
+        "BubbleSort",
+        "InsertionSort"
+    ],
+    "Quadratic Algorithms Comparison",
+    "figure5_quadratic_algorithms.png"
+)
+
+# =====================================================
+# Figure 6: O(n log n) Algorithms Only
+# =====================================================
+
+plot_algorithms(
+    df,
+    [
+        "MergeSort",
+        "QuickSort",
+        "HeapSort",
+        "ShellSort"
+    ],
+    "O(n log n) Algorithms Comparison",
+    "figure6_nlogn_algorithms.png"
+)
+
+# =====================================================
+# Figure 7: Full Comparison (Log Scale)
+# =====================================================
+
+plot_algorithms(
+    df,
+    [
+        "BubbleSort",
+        "InsertionSort",
+        "MergeSort",
+        "QuickSort",
+        "HeapSort",
+        "ShellSort"
+    ],
+    "All Algorithms Comparison (Log Scale)",
+    "figure7_full_comparison_log.png",
+    log_scale=True
+)
+
+print("Generated:")
+print(" - figure1_very_small_inputs.png")
+print(" - figure2_small_inputs.png")
+print(" - figure3_transition_region.png")
+print(" - figure4_medium_large_inputs.png")
+print(" - figure5_quadratic_algorithms.png")
+print(" - figure6_nlogn_algorithms.png")
+print(" - figure7_full_comparison_log.png")
