@@ -48,6 +48,16 @@ int main()
     sizes.push(40);
     sizes.push(45);
     sizes.push(50);
+    sizes.push(55);
+    sizes.push(60);
+    sizes.push(65);
+    sizes.push(70);
+    sizes.push(75);
+    sizes.push(80);
+    sizes.push(85);
+    sizes.push(90);
+    sizes.push(95);
+    sizes.push(100);
     sizes.push(100);
     sizes.push(200);
     sizes.push(300);
