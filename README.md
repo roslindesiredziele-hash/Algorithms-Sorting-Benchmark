@@ -8,6 +8,32 @@ The project was developed as part of the **Algorithms I** course and focuses on 
 
 ---
 
+## Overview
+
+This project implements and evaluates six classical sorting algorithms using a custom dynamic array implementation (`Vec`).
+
+The primary goal is to experimentally compare theoretical complexity analysis with real-world performance through systematic benchmarking. Each algorithm is executed on identical randomly generated datasets across multiple input sizes, and execution times are averaged over 100 runs to reduce measurement noise.
+
+The project investigates:
+
+- How algorithmic complexity affects scalability.
+- The practical performance difference between O(n²) and O(n log n) algorithms.
+- The impact of implementation details and constant factors on running time.
+- The relationship between theoretical analysis and experimental results.
+
+Algorithms evaluated:
+
+- Bubble Sort
+- Insertion Sort
+- Merge Sort
+- Quick Sort
+- Heap Sort
+- Shell Sort
+
+The benchmark demonstrates how algorithm selection becomes increasingly important as input size grows.
+
+---
+
 ## Features
 
 ### Implemented Sorting Algorithms
@@ -59,7 +85,40 @@ The project includes a custom dynamic array implementation named `Vec` featuring
 | Merge Sort | O(n log n) | O(n log n) | O(n log n) |
 | Quick Sort | O(n log n) | O(n log n) | O(n²) |
 | Heap Sort | O(n log n) | O(n log n) | O(n log n) |
-| Shell Sort | Depends on gap sequence | Typically better than O(n²) | Depends on gap sequence |
+| Shell Sort | Approximately O(n log n) in practice | Approximately O(n^1.3–n^1.5) | O(n²) |
+---
+
+### Shell Sort Gap Sequence
+
+The implementation uses Shell's original gap sequence:
+
+```text
+n/2, n/4, n/8, ..., 1
+```
+
+For example, when sorting 100 elements, the gap values are:
+
+```text
+50, 25, 12, 6, 3, 1
+```
+
+The sequence is generated using:
+
+```cpp
+for (int gap = n / 2; gap > 0; gap /= 2)
+```
+
+The choice of gap sequence has a significant impact on Shell Sort's performance.
+
+Using the halving sequence:
+
+- Moves elements long distances early in the sorting process.
+- Reduces the amount of work required during the final insertion-sort pass.
+- Performs much better than Bubble Sort and Insertion Sort.
+- Produces practical performance close to O(n log n) for random data.
+- Retains a theoretical worst-case complexity of O(n²).
+
+More advanced gap sequences such as Hibbard's, Knuth's, or Sedgewick's sequences can improve both theoretical and experimental performance. The original Shell sequence was chosen because it is easy to understand and implement for educational purposes.
 
 ---
 
@@ -304,6 +363,30 @@ Merge Sort : 0.6688 ms
 
 Quick Sort benefits from excellent cache locality and low constant factors on randomly generated input, explaining its superior performance.
 
+### Why Shell Sort Performs Well
+
+The strong performance of Shell Sort is largely explained by the gap sequence used in this implementation.
+
+Unlike Insertion Sort, which only compares neighboring elements, Shell Sort allows elements to move long distances through the array during the early stages of the algorithm.
+
+Gap sequence used:
+
+```text
+n/2, n/4, n/8, ..., 1
+```
+
+At 2000 elements:
+
+```text
+Shell Sort : 0.5115 ms
+Heap Sort  : 0.5771 ms
+Merge Sort : 0.6688 ms
+```
+
+Despite having weaker theoretical guarantees than Merge Sort and Heap Sort, Shell Sort outperformed both on the tested random datasets.
+
+This demonstrates that practical performance depends not only on asymptotic complexity but also on implementation details, memory access patterns, and constant factors.
+
 ---
 
 ## Figure 7 – Full Comparison (Logarithmic Scale)
@@ -397,9 +480,10 @@ Algorithms-Sorting-Benchmark
 │
 ├── data/
 │   ├── data.csv
-│   └── plot_results.py
+│  
 │
 ├── report/
+|   |── graph.py
 │   ├── figure1_very_small_inputs.png
 │   ├── figure2_small_inputs.png
 │   ├── figure3_transition_region.png
@@ -427,7 +511,14 @@ Algorithms-Sorting-Benchmark
 
 ---
 
-## Build
+## Setup and Usage
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/Algorithms-Sorting-Benchmark.git
+cd Algorithms-Sorting-Benchmark
+```
 
 ### Configure
 
@@ -447,10 +538,54 @@ cmake --build build --config Release
 ctest --test-dir build --output-on-failure
 ```
 
+Example output:
+
+```text
+Start 1: AlgorithmsSortingBenchmarkTests
+1/1 Test #1: AlgorithmsSortingBenchmarkTests ... Passed
+
+100% tests passed out of 1
+```
+
 ### Run Benchmark
 
 ```bash
 build/Release/benchmark.exe
+```
+
+### Benchmark Output
+
+Results are written automatically to:
+
+```text
+data/data.csv
+```
+
+### Generate Graphs
+
+Install dependencies:
+
+```bash
+pip install pandas matplotlib
+```
+
+Generate all graphs:
+
+```bash
+python data/plot_results.py
+```
+
+Generated files:
+
+```text
+report/
+├── figure1_very_small_inputs.png
+├── figure2_small_inputs.png
+├── figure3_transition_region.png
+├── figure4_medium_large_inputs.png
+├── figure5_quadratic_algorithms.png
+├── figure6_nlogn_algorithms.png
+└── figure7_full_comparison_log.png
 ```
 
 ---
@@ -473,13 +608,14 @@ build/Release/benchmark.exe
 
 - Comparison against `std::sort`
 - Statistical confidence intervals
-- Additional input distributions
+- Additional input distributions:
   - Sorted arrays
   - Reverse-sorted arrays
   - Nearly sorted arrays
   - Duplicate-heavy arrays
-- Cross-platform timing using `std::chrono`
-- Alternative Shell Sort gap sequences
+- Cross-platform benchmarking using `std::chrono`
+- Evaluation of Hibbard, Knuth, and Sedgewick Shell Sort gap sequences
+- Performance analysis on larger datasets
 
 ---
 
