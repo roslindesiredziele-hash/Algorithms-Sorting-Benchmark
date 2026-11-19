@@ -40,9 +40,13 @@ int main()
     Vec sizes(1);
     sizes.push(5);
     sizes.push(10);
+    sizes.push(15);
     sizes.push(20);
+    sizes.push(25);
     sizes.push(30);
+    sizes.push(35);
     sizes.push(40);
+    sizes.push(45);
     sizes.push(50);
     sizes.push(100);
     sizes.push(200);
