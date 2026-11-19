@@ -58,7 +58,6 @@ int main()
     sizes.push(90);
     sizes.push(95);
     sizes.push(100);
-    sizes.push(100);
     sizes.push(200);
     sizes.push(300);
     sizes.push(400);
