@@ -4,6 +4,15 @@ project(AlgorithmsSortingBenchmark)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+------------------------
+
+add_executable(
+    benchmark
+    src/main.cpp
+    src/Vec.cpp
+    src/sorts.cpp
+)
+-----------------------
 
 enable_testing()
 
@@ -14,9 +23,11 @@ add_executable(
     tests/AlgorithmsSortingBenchmark_TDD.cpp
 )
 
-target_include_directories(AlgorithmsSortingBenchmark_TDD PRIVATE
-    src
-    external
+target_include_directories(
+    AlgorithmsSortingBenchmark_TDD
+    PRIVATE
+        src
+        external
 )
 
 add_test(
