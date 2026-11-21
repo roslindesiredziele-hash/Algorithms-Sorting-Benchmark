@@ -133,7 +133,7 @@ void QuickSort(Vec &V, int left, int right)
 
       SwapInt(V[i], V[right]);
 
-    int pivotpos = i - 1;
+    int pivotpos = i;
 
     QuickSort(V, left, pivotpos - 1);
     QuickSort(V, pivotpos + 1, right);
